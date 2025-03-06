@@ -55,3 +55,11 @@ C:\Users\User\OneDrive\Desktop\Anuja\C#\MicroServiceArchitecture\docker\DockerCo
 C:\Users\User\OneDrive\Desktop\Anuja\C#\MicroServiceArchitecture\docker\DockerCompose_SSMS_Gateway\obj\Debug\docker-compose.dcproj.AssemblyReference.cache
 C:\Users\User\OneDrive\Desktop\Anuja\C#\MicroServiceArchitecture\docker\DockerCompose_SSMS_Gateway\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache
 C:\Users\User\OneDrive\Desktop\Anuja\C#\MicroServiceArchitecture\docker\DockerCompose_SSMS_Gateway\obj\Debug\docker-c.35A3FFBA.Up2Date
+C:\Users\User\OneDrive\Desktop\Anuja\C#\MicroServiceArchitecture\docker\DockerCompose_SSMS_Gateway\bin\Debug\Yarp_gateway.deps.json
+C:\Users\User\OneDrive\Desktop\Anuja\C#\MicroServiceArchitecture\docker\DockerCompose_SSMS_Gateway\bin\Debug\Yarp_gateway.runtimeconfig.json
+C:\Users\User\OneDrive\Desktop\Anuja\C#\MicroServiceArchitecture\docker\DockerCompose_SSMS_Gateway\bin\Debug\Yarp_gateway.staticwebassets.endpoints.json
+C:\Users\User\OneDrive\Desktop\Anuja\C#\MicroServiceArchitecture\docker\DockerCompose_SSMS_Gateway\bin\Debug\Yarp_gateway.exe
+C:\Users\User\OneDrive\Desktop\Anuja\C#\MicroServiceArchitecture\docker\DockerCompose_SSMS_Gateway\bin\Debug\Yarp_gateway.dll
+C:\Users\User\OneDrive\Desktop\Anuja\C#\MicroServiceArchitecture\docker\DockerCompose_SSMS_Gateway\bin\Debug\Yarp.ReverseProxy.dll
+C:\Users\User\OneDrive\Desktop\Anuja\C#\MicroServiceArchitecture\docker\DockerCompose_SSMS_Gateway\bin\Debug\System.IO.Hashing.dll
+C:\Users\User\OneDrive\Desktop\Anuja\C#\MicroServiceArchitecture\docker\DockerCompose_SSMS_Gateway\bin\Debug\Yarp_gateway.pdb

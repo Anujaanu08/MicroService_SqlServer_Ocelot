@@ -1,4 +1,31 @@
 services:
+    
+  gateway:
+    image: ${DOCKER_REGISTRY-}gateway
+    build:
+      context: .
+      dockerfile: Gateway/Dockerfile
+    networks : 
+        - MicroServiceNetwork
+    ports:
+      - "5000:5000"
+    depends_on :
+      - booksservice
+      - rentalsservice
+    restart: on-failure
+
+
+  yarp_gateway:
+    image: ${DOCKER_REGISTRY-}yarpgateway
+    build:
+      context: .
+      dockerfile: Yarp_gateway/Dockerfile
+    ports:
+      - "6000:6000"
+    networks : 
+        - MicroServiceNetwork
+
+
   booksservice:
     image: ${DOCKER_REGISTRY-}booksservice
     build:
@@ -14,20 +41,6 @@ services:
         - MicroServiceNetwork
     restart: on-failure
 
-    
-  gateway:
-    image: ${DOCKER_REGISTRY-}gateway
-    build:
-      context: .
-      dockerfile: Gateway/Dockerfile
-    networks : 
-        - MicroServiceNetwork
-    ports:
-      - "5000:5000"
-    depends_on :
-      - booksservice
-      - rentalsservice
-    restart: on-failure
 
   rentalsservice:
     image: ${DOCKER_REGISTRY-}rentalsservice
@@ -51,12 +64,13 @@ services:
       - "1433:1433"
     environment:
       ACCEPT_EULA: "Y"
-      SA_PASSWORD : "Password123"
+      SA_PASSWORD : "Anutae08v"
     volumes:
       - sqlserver_data:/var/opt/mssql
     networks : 
      - MicroServiceNetwork
     restart: on-failure
+    
 
 networks:
   MicroServiceNetwork:

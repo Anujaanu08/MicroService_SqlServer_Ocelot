@@ -1,7 +1,7 @@
 services:
   booksservice:
     image: booksservice:dev
-    container_name: "BooksService"
+    container_name: "BooksService_1"
     build:
       args:
         LAUNCHING_FROM_VS: true
@@ -37,7 +37,7 @@ services:
     tty: true
   gateway:
     image: gateway:dev
-    container_name: "Gateway"
+    container_name: "Gateway_1"
     build:
       args:
         LAUNCHING_FROM_VS: true
@@ -74,7 +74,7 @@ services:
 
   rentalsservice:
     image: rentalsservice:dev
-    container_name: "RentalsService"
+    container_name: "RentalsService_1"
     build:
       args:
         LAUNCHING_FROM_VS: true
@@ -105,6 +105,43 @@ services:
     labels:
       com.microsoft.visualstudio.debuggee.program: "dotnet"
       com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /.nuget/packages --additionalProbingPath /.nuget/fallbackpackages --additionalProbingPath /.nuget/fallbackpackages2  \"/app/bin/Debug/net8.0/RentalsService.dll\""
+      com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
+      com.microsoft.visualstudio.debuggee.killprogram: "dotnet --roll-forward Major /VSTools/DistrolessHelper/DistrolessHelper.dll --stop dotnet"
+    tty: true
+
+  yarp_gateway:
+    image: yarpgateway:dev
+    container_name: "Yarp_gateway"
+    build:
+      args:
+        LAUNCHING_FROM_VS: true
+        BUILD_CONFIGURATION: Debug
+      target: base
+      labels:
+        com.microsoft.created-by: "visual-studio"
+        com.microsoft.visual-studio.project-name: "Yarp_gateway"
+    environment:
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=true
+      - NUGET_FALLBACK_PACKAGES=/.nuget/fallbackpackages;/.nuget/fallbackpackages2
+    volumes:
+      - C:\Users\User\OneDrive\Desktop\Anuja\C#\MicroServiceArchitecture\docker\DockerCompose_SSMS_Gateway\Yarp_gateway:/app:rw
+      - C:\Users\User\OneDrive\Desktop\Anuja\C#\MicroServiceArchitecture\docker\DockerCompose_SSMS_Gateway:/src:rw
+      - C:\Users\User\vsdbg\vs2017u5:/remote_debugger:rw
+      - C:\Users\User\.nuget\packages:/.nuget/packages:ro
+      - C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages:/.nuget/fallbackpackages:ro
+      - C:\Program Files\dotnet\sdk\NuGetFallbackFolder:/.nuget/fallbackpackages2:ro
+      - C:\Users\User\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+      - C:\Users\User\AppData\Roaming\ASP.NET\Https:/home/app/.aspnet/https:ro
+      - C:\Users\User\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+      - C:\Users\User\AppData\Roaming\Microsoft\UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Sdks\Microsoft.Docker.Sdk\tools\linux-x64\net8.0:/VSTools:ro
+      - C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\IDE\CommonExtensions\Microsoft\HotReload:/HotReloadAgent:ro
+
+    entrypoint: "dotnet --roll-forward Major /VSTools/DistrolessHelper/DistrolessHelper.dll --wait"
+    labels:
+      com.microsoft.visualstudio.debuggee.program: "dotnet"
+      com.microsoft.visualstudio.debuggee.arguments: " --additionalProbingPath /.nuget/packages --additionalProbingPath /.nuget/fallbackpackages --additionalProbingPath /.nuget/fallbackpackages2  \"/app/bin/Debug/net8.0/Yarp_gateway.dll\""
       com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
       com.microsoft.visualstudio.debuggee.killprogram: "dotnet --roll-forward Major /VSTools/DistrolessHelper/DistrolessHelper.dll --stop dotnet"
     tty: true

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentalsService", "RentalsSe
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{1E40F491-03CD-450A-970B-9002D3355168}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yarp_gateway", "Yarp_gateway\Yarp_gateway.csproj", "{2C1CD90C-AA1C-42B0-BF9A-C03D38FF2E1A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{1E40F491-03CD-450A-970B-9002D3355168}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E40F491-03CD-450A-970B-9002D3355168}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E40F491-03CD-450A-970B-9002D3355168}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C1CD90C-AA1C-42B0-BF9A-C03D38FF2E1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C1CD90C-AA1C-42B0-BF9A-C03D38FF2E1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C1CD90C-AA1C-42B0-BF9A-C03D38FF2E1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C1CD90C-AA1C-42B0-BF9A-C03D38FF2E1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

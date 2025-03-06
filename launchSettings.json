@@ -6,7 +6,8 @@
       "serviceActions": {
         "booksservice": "StartDebugging",
         "rentalsservice": "StartDebugging",
-        "gateway": "StartDebugging"
+        "gateway": "StartDebugging",
+        "yarp_gateway": "StartDebugging"
       }
     }
   }
