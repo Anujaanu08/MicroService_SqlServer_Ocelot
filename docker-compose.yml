@@ -1,0 +1,66 @@
+services:
+  booksservice:
+    image: ${DOCKER_REGISTRY-}booksservice
+    build:
+      context: .
+      dockerfile: BooksService/Dockerfile
+    depends_on:
+      - sqlserver
+    environment:
+     - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "8000:8000"
+    networks : 
+        - MicroServiceNetwork
+    restart: on-failure
+
+    
+  gateway:
+    image: ${DOCKER_REGISTRY-}gateway
+    build:
+      context: .
+      dockerfile: Gateway/Dockerfile
+    networks : 
+        - MicroServiceNetwork
+    ports:
+      - "5000:5000"
+    depends_on :
+      - booksservice
+      - rentalsservice
+    restart: on-failure
+
+  rentalsservice:
+    image: ${DOCKER_REGISTRY-}rentalsservice
+    build:
+      context: .
+      dockerfile: RentalsService/Dockerfile
+    depends_on:
+      - sqlserver
+    environment:
+       - ASPNETCORE_ENVIRONMENT=Development 
+    ports:
+      - "7000:7000"
+    networks : 
+        - MicroServiceNetwork
+    restart: on-failure
+
+    
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - "1433:1433"
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD : "Password123"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    networks : 
+     - MicroServiceNetwork
+    restart: on-failure
+
+networks:
+  MicroServiceNetwork:
+
+
+volumes:
+  sqlserver_data:

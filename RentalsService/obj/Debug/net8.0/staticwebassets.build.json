@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "s42G6AlTuXjUaGW3MIE1fK7ZlruNPC52PFIlazpMUlw=",
+  "Source": "RentalsService",
+  "BasePath": "_content/RentalsService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

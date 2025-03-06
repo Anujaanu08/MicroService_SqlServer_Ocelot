@@ -1,0 +1,227 @@
+name: dockercompose15247028389550690154
+services:
+  booksservice:
+    build:
+      context: C:\Users\User\OneDrive\Desktop\Anuja\C#\MicroServiceArchitecture\docker\DockerCompose_SSMS_Gateway
+      dockerfile: BooksService/Dockerfile
+      args:
+        BUILD_CONFIGURATION: Debug
+        LAUNCHING_FROM_VS: "true"
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: BooksService
+      target: base
+    container_name: BooksService
+    depends_on:
+      sqlserver:
+        condition: service_started
+        required: true
+    entrypoint:
+      - dotnet
+      - --roll-forward
+      - Major
+      - /VSTools/DistrolessHelper/DistrolessHelper.dll
+      - --wait
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: "8000"
+      ASPNETCORE_HTTPS_PORTS: "8001"
+      ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
+      DOTNET_USE_POLLING_FILE_WATCHER: "1"
+      NUGET_FALLBACK_PACKAGES: /.nuget/fallbackpackages;/.nuget/fallbackpackages2
+    image: booksservice:dev
+    labels:
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /.nuget/packages --additionalProbingPath /.nuget/fallbackpackages --additionalProbingPath /.nuget/fallbackpackages2  "/app/bin/Debug/net8.0/BooksService.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: dotnet --roll-forward Major /VSTools/DistrolessHelper/DistrolessHelper.dll --stop dotnet
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    networks:
+      productnetwork: null
+    ports:
+      - mode: ingress
+        target: 8000
+        published: "8000"
+        protocol: tcp
+      - mode: ingress
+        target: 8001
+        published: "8001"
+        protocol: tcp
+      - mode: ingress
+        target: 8000
+        protocol: tcp
+      - mode: ingress
+        target: 8001
+        protocol: tcp
+    restart: on-failure
+    tty: true
+    volumes:
+      - type: bind
+        source: C:\Users\User\AppData\Roaming\Microsoft\UserSecrets
+        target: /home/app/.microsoft/usersecrets
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\User\AppData\Roaming\ASP.NET\Https
+        target: /home/app/.aspnet/https
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\User\OneDrive\Desktop\Anuja\C#\MicroServiceArchitecture\docker\DockerCompose_SSMS_Gateway\BooksService
+        target: /app
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\User\OneDrive\Desktop\Anuja\C#\MicroServiceArchitecture\docker\DockerCompose_SSMS_Gateway
+        target: /src
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\User\vsdbg\vs2017u5
+        target: /remote_debugger
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\User\.nuget\packages
+        target: /.nuget/packages
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages
+        target: /.nuget/fallbackpackages
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Program Files\dotnet\sdk\NuGetFallbackFolder
+        target: /.nuget/fallbackpackages2
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\User\AppData\Roaming\ASP.NET\Https
+        target: /root/.aspnet/https
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\User\AppData\Roaming\Microsoft\UserSecrets
+        target: /root/.microsoft/usersecrets
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Sdks\Microsoft.Docker.Sdk\tools\linux-x64\net8.0
+        target: /VSTools
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\IDE\CommonExtensions\Microsoft\HotReload
+        target: /HotReloadAgent
+        read_only: true
+        bind:
+          create_host_path: true
+  gateway:
+    build:
+      context: C:\Users\User\OneDrive\Desktop\Anuja\C#\MicroServiceArchitecture\docker\DockerCompose_SSMS_Gateway
+      dockerfile: Gateway/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: "5000"
+      ASPNETCORE_HTTPS_PORTS: "5001"
+    image: gateway
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 5000
+        protocol: tcp
+      - mode: ingress
+        target: 5001
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: C:\Users\User\AppData\Roaming/Microsoft/UserSecrets
+        target: /home/app/.microsoft/usersecrets
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\User\AppData\Roaming/ASP.NET/Https
+        target: /home/app/.aspnet/https
+        read_only: true
+        bind:
+          create_host_path: true
+  rentalsservice:
+    build:
+      context: C:\Users\User\OneDrive\Desktop\Anuja\C#\MicroServiceArchitecture\docker\DockerCompose_SSMS_Gateway
+      dockerfile: RentalsService/Dockerfile
+    depends_on:
+      sqlserver:
+        condition: service_started
+        required: true
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: "7000"
+      ASPNETCORE_HTTPS_PORTS: "7001"
+    image: rentalsservice
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 7000
+        published: "7000"
+        protocol: tcp
+      - mode: ingress
+        target: 7001
+        published: "7001"
+        protocol: tcp
+      - mode: ingress
+        target: 7000
+        protocol: tcp
+      - mode: ingress
+        target: 7001
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: C:\Users\User\AppData\Roaming/Microsoft/UserSecrets
+        target: /home/app/.microsoft/usersecrets
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\User\AppData\Roaming/ASP.NET/Https
+        target: /home/app/.aspnet/https
+        read_only: true
+        bind:
+          create_host_path: true
+  sqlserver:
+    container_name: sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: Anutae08v
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    networks:
+      productnetwork: null
+    ports:
+      - mode: ingress
+        target: 1433
+        published: "1433"
+        protocol: tcp
+    restart: always
+    volumes:
+      - type: volume
+        source: sqlserver_data
+        target: /var/opt/mssql
+        volume: {}
+networks:
+  default:
+    name: dockercompose15247028389550690154_default
+  productnetwork:
+    name: dockercompose15247028389550690154_productnetwork
+volumes:
+  sqlserver_data:
+    name: dockercompose15247028389550690154_sqlserver_data
